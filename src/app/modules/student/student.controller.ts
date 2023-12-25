@@ -1,32 +1,33 @@
-import { NextFunction, Request, Response } from 'express';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
+import { NextFunction, Request, RequestHandler, Response } from 'express';
 import { StudentServices } from './student.services';
 
-const getAllStudents = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const result = await StudentServices.getAllStudentsFromDB();
-    res.status(200).json({
-      success: true,
-      message: 'Student are retireved successfully',
-      data: result,
-    });
-  } catch (err) {
-    next(err);
-  }
+//higher order async function
+const catchAsync = (fn: RequestHandler) => {
+  return (req: Request, res: Response, next: NextFunction) => {
+    Promise.resolve(fn(req, res, next)).catch((err) => next(err));
+  };
 };
 
-const getSingleStudent = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const { studentId } = req.params;
-    const result = await StudentServices.getSingleStudentFromBD(studentId);
-    res.status(200).json({
-      success: true,
-      message: 'Student are retireved successfully',
-      data: result,
-    });
-  } catch (err) {
-    next(err);
-  }
-};
+const getAllStudents = catchAsync(async (req, res, next) => {
+  const result = await StudentServices.getAllStudentsFromDB();
+  res.status(200).json({
+    success: true,
+    message: 'Student are retireved successfully',
+    data: result,
+  });
+});
+
+const getSingleStudent = catchAsync(async (req, res, next) => {
+  const { studentId } = req.params;
+  const result = await StudentServices.getSingleStudentFromBD(studentId);
+  res.status(200).json({
+    success: true,
+    message: 'Student are retireved successfully',
+    data: result,
+  });
+});
 
 export const StudentControllers = {
   getAllStudents,
