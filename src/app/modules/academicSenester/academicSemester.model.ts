@@ -13,7 +13,7 @@ const academicSemeterSchema = new Schema<TAcademicSemeter>({
     required: true,
   },
   year: {
-    type: Date,
+    type: String,
     readonly: true,
   },
   code: {
@@ -31,6 +31,18 @@ const academicSemeterSchema = new Schema<TAcademicSemeter>({
     enum: Months,
     require: true,
   },
+});
+
+academicSemeterSchema.pre('save', async function (next) {
+  const isSemseterExsist = await AcamdeicSemester.findOne({
+    year: this.year,
+    name: this.name,
+  });
+
+  if (isSemseterExsist) {
+    throw new Error('Semseter already exists !');
+  }
+  next();
 });
 
 export const AcamdeicSemester = model<TAcademicSemeter>(
