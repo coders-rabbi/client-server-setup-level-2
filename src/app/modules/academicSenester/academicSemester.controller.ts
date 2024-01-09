@@ -23,7 +23,33 @@ const findAcademicSemesterController = catchAsync(async (req, res) => {
   });
 });
 
+//Find Single Semester Controller
+const findSingleAcademicSemesterController = catchAsync(async (req, res) => {
+  const { semesterId } = req.params;
+  console.log(semesterId);
+  const result =
+    await AcademicSemesterService.getSingleSemseterFromBD(semesterId);
+  res.status(200).json({
+    success: true,
+    message: 'Single Semseter fatched successfully!',
+    data: result,
+  });
+});
+
+const updateAcademicSemesterController = catchAsync(async (req, res) => {
+  const { semesterId } = req.params;
+  const result =
+    await AcademicSemesterService.getSingleSemseterFromBD(semesterId);
+  res.status(200).json({
+    success: true,
+    message: 'Update Semseter successfully!',
+    data: result,
+  });
+});
+
 export const AcademicSemesterController = {
   createAcademicSemester,
   findAcademicSemesterController,
+  findSingleAcademicSemesterController,
+  updateAcademicSemesterController,
 };

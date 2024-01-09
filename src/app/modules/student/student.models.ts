@@ -58,6 +58,10 @@ const studentSchema = new Schema<TStudent>({
   guardian: guardianSchema,
   localGuardian: localGuardianSchema,
   profileImage: { type: String },
+  admissionSemester: {
+    type: Schema.Types.ObjectId,
+    ref: 'AcademicSemester',
+  },
 });
 
 export const StudentModel = model<TStudent>('Student', studentSchema);

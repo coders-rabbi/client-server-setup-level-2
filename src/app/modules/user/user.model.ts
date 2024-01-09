@@ -11,6 +11,10 @@ const userSchema = new Schema<TUser>(
       type: Boolean,
       default: true,
     },
+    role:{
+      type: String,
+      required: true,
+    },
     status: {
       type: String,
       enum: ['in-progress', 'blocked'],
