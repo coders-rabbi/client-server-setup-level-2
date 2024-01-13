@@ -19,7 +19,7 @@ const getAllSemseterFromBD = async () => {
 
 //Single Semester find Service
 const getSingleSemseterFromBD = async (_id: string) => {
-  console.log(_id);
+  // console.log(_id);
   const result = await AcademicSemester.findById(_id);
   return result;
 };

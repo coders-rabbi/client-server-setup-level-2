@@ -4,7 +4,7 @@ import { AcademicSemesterService } from './academicSemester.service';
 //Create Academic Semester controller
 const createAcademicSemester = catchAsync(async (req, res) => {
   const semesterData = req.body;
-  const result =
+  const result = 
     await AcademicSemesterService.createAcademicSemesterIntoDB(semesterData);
   res.status(200).json({
     success: true,
