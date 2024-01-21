@@ -5,6 +5,7 @@ import {
   AcademicSemesterName,
   Months,
 } from './academicSemester.constant';
+import { AppError } from '../../errors/AppError';
 
 const academicSemeterSchema = new Schema<TAcademicSemeter>({
   name: {
@@ -40,7 +41,7 @@ academicSemeterSchema.pre('save', async function (next) {
   });
 
   if (isSemseterExsist) {
-    throw new Error('Semseter already exists !');
+    throw new AppError(404,'Semseter already exists !');
   }
   next();
 });

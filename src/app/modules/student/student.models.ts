@@ -62,6 +62,10 @@ const studentSchema = new Schema<TStudent>({
     type: Schema.Types.ObjectId,
     ref: 'AcademicSemester',
   },
+  academicDepartment: {
+    type: Schema.Types.ObjectId,
+    ref: 'academicDeparment',
+  },
 });
 
 export const StudentModel = model<TStudent>('Student', studentSchema);
