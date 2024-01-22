@@ -58,6 +58,7 @@ const studentSchema = new Schema<TStudent>({
   guardian: guardianSchema,
   localGuardian: localGuardianSchema,
   profileImage: { type: String },
+  isDeleted: { type: Boolean, default: false },
   admissionSemester: {
     type: Schema.Types.ObjectId,
     ref: 'AcademicSemester',
@@ -67,5 +68,7 @@ const studentSchema = new Schema<TStudent>({
     ref: 'academicDeparment',
   },
 });
+
+
 
 export const StudentModel = model<TStudent>('Student', studentSchema);
