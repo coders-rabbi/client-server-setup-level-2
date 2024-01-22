@@ -60,6 +60,7 @@ const createStudentIntoDB = async (password: string, payload: TStudent) => {
   } catch (err) {
     session.abortTransaction();
     session.endSession();
+    throw new AppError(404, 'Student create failed');
   }
 };
 

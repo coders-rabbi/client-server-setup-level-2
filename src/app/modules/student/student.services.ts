@@ -60,6 +60,7 @@ const deleteStudentFromBD = async (id: string) => {
   } catch {
     await session.abortTransaction();
     await session.endSession();
+    throw new AppError(404, 'Student Delete Failed');
   }
 };
 

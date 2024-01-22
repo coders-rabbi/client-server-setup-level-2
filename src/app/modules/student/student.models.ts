@@ -69,6 +69,9 @@ const studentSchema = new Schema<TStudent>({
   },
 });
 
-
+// studentSchema.static.isUserExists = async function (id: string) {
+//   const isUserExit = await StudentModel.findOne({ id: id });
+//   return isUserExit
+// };
 
 export const StudentModel = model<TStudent>('Student', studentSchema);
