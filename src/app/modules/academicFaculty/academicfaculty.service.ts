@@ -24,6 +24,7 @@ const updateAcademicFaculty = async (
   const result = await academicFacultyModel.findOneAndUpdate(
     { _id: facultyId },
     payload,
+    { new: true },
   );
   return result;
 };
